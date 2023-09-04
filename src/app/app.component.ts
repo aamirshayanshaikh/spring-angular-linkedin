@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {Product, ProductService} from "./product/product.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angualar-demo';
+
+  products: Product[] = [];
+
+  constructor(private productService: ProductService) { }
+  ngOnInit() {
+    this.productService.getAll()
+      .subscribe((products: Product[]) => {
+        this.products = products;
+      });
+  }
+
 }
